@@ -1,14 +1,13 @@
 ---
 const gaId = 'G-M324PMDVRH';
 ---
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
 <script src={ `https://www.googletagmanager.com/gtag/js?id=${gaId}` }></script>
 <script>
-  if (window.location.hostname === 'aria.wtf') {
-    window.dataLayer = window.dataLayer || [];
-    const script = document.head.querySelector('script[src*="googletagmanager"]');
-    const { searchParams } = new URL(script.src);
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', searchParams.get('id'), {'transport_type': 'beacon'});
-  }
+  window.dataLayer = window.dataLayer || [];
+  const script = document.head.querySelector('script[src*="googletagmanager"]');
+  const { searchParams } = new URL(script.src);
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', searchParams.get('id'), {'transport_type': 'beacon'});
 </script>
