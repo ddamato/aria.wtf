@@ -1,13 +1,15 @@
 ---
-const gaId = 'G-M324PMDVRH';
+const { gaProperty } = Astro.props;
 ---
 <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-<script src={ `https://www.googletagmanager.com/gtag/js?id=${gaId}` }></script>
+<script src={ `https://www.googletagmanager.com/gtag/js?id=${gaProperty}` }></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  const script = document.head.querySelector('script[src*="googletagmanager"]');
-  const { searchParams } = new URL(script.src);
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', searchParams.get('id'), {'transport_type': 'beacon'});
+  (function() {
+    window.dataLayer = window.dataLayer || [];
+    const script = document.head.querySelector('script[src*="googletagmanager"]');
+    const { searchParams } = new URL(script.src);
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', searchParams.get('id'), {'transport_type': 'beacon'});
+  })()
 </script>

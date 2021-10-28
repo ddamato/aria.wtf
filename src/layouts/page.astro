@@ -3,32 +3,28 @@ import OpenGraph from '../components/open-graph.astro';
 import Meta from '../components/meta.astro';
 import Fonts from '../components/fonts.astro';
 import Analytics from '../components/analytics.astro';
+import Navigation from '../components/navigation.astro';
 
 const pageProps = {
   hostname: 'aria.wtf',
   description: 'Hello world',
   family: 'Cabin',
+  gaProperty: 'G-M324PMDVRH',
   ...Astro.props.content,
 }
----
 
+---
 <html>
   <head>
     <title>aria.wtf: { pageProps.title }</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <OpenGraph { ...pageProps }/>
     <Meta { ...pageProps }/>
-    <Fonts { ...pageProps }/>
+    <Fonts client:load { ...pageProps }/>
     <Analytics client:load/>
   </head>
-  <body style={`font-family: ${pageProps.family}`}>
-    <!-- Adds a navigation bar to every page. -->
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Posts</a>
-      <a href="#">Contact</a>
-    </nav>
-    <!-- slot: your page content will be injected here. -->
-    <slot />
+  <body>
+    <Navigation/>
+    <slot/>
   </body>
 </html>
