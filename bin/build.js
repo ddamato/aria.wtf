@@ -25,13 +25,12 @@ const sitedata = {
 function parse(file) {
   const { name } = path.parse(file);
   const dir = path.basename(path.dirname(file));
-  const contentType = dir !== 'content' ? dir : null;
+  const parentDir = dir !== 'content' ? dir : null;
   return {
     name,
     filename: `${name}.html`,
-    contentType,
-    root: contentType ? '../' : '',
-    filejoin: [COMPILED_SITE_PATH, contentType].filter(Boolean)
+    parentDir,
+    filejoin: [COMPILED_SITE_PATH, parentDir].filter(Boolean)
   }
 }
 
@@ -48,18 +47,18 @@ async function compile(file) {
 }
 
 async function lookup(metadata) {
-  const reference = metadata.reduce((acc, { contentType, name }) => {
-    if (!contentType) return acc;
-    if (!Array.isArray(acc[contentType])) acc[contentType] = [];
-    acc[contentType].push(name);
+  const reference = metadata.reduce((acc, { parentDir, name }) => {
+    if (!parentDir) return acc;
+    if (!Array.isArray(acc[parentDir])) acc[parentDir] = [];
+    acc[parentDir].push(name);
     return acc;
   }, {});
   return fs.writeFile(path.join(COMPILED_SITE_PATH, 'lookup.json'), JSON.stringify(reference), { encoding: 'utf8' });
 }
 
 async function sitemap(metadata) {
-  const urls = metadata.map(({ contentType, name }) => {
-    const sitemapUrl = new URL(path.join(...[contentType, name].filter(Boolean)), BASEURL);
+  const urls = metadata.map(({ parentDir, name }) => {
+    const sitemapUrl = new URL(path.join(...[parentDir, name].filter(Boolean)), BASEURL);
     return name === 'index' ? BASEURL : sitemapUrl;
   });
   return fs.writeFile(path.join(COMPILED_SITE_PATH, 'sitemap.txt'), urls.join('\n'), { encoding: 'utf8' });
