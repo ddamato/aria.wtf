@@ -8,6 +8,6 @@ export default class BeginBrowsing extends HTMLElement {
 
     const button = this.shadowRoot.querySelector('button');
     const search = document.querySelector('term-search');
-    button.addEventListener('click', () => search.focus());
+    button.addEventListener('click', () => search && search.focus());
   }
 }

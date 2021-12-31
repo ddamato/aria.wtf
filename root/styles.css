@@ -46,18 +46,23 @@ a {
 header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
   margin-bottom: 1rem;
 }
 
 header > * {
   display: flex;
   gap: 0.5rem;
-  flex: 1;
   text-decoration: none;
 }
 
 header * {
   margin: 0;
+}
+
+header > div {
+  flex: 1;
 }
 
 header term-search {
@@ -108,4 +113,5 @@ fog-canvas {
   max-width: 40ch;
   padding: 0 1em;
   color: white;
+  font-size: min(7vw, 1em);
 }
