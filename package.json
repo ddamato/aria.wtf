@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:components": "rollup components/index.js --file _site/components.iife.js --format iife -p html -p 'postcss={ inject: false }' -p terser -p @rollup/plugin-node-resolve -p @rollup/plugin-commonjs",
-    "build:pages": "node ./bin/compile.js",
+    "build:pages": "node ./bin/build.js",
     "build": "rm -rf _site && cp -r root/. _site && npm run build:components && npm run build:pages"
   },
   "devDependencies": {
