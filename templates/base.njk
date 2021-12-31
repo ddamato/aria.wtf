@@ -3,13 +3,27 @@
   <head>
     {% include "head.njk" %}
   </head>
-  <body>
+  <body data-page="{{ name }}">
     <header>
-      {% include "logo.svg" %}
-      <term-search></term-search>
+      <a href="/">
+        {% include "logo.svg" %}
+        <h1>aria.wtf</h1>
+      </a>
+      <div>
+        <term-search></term-search>
+        <random-content></random-content>
+      </div>
     </header>
     <main>
-      {{ content | safe }}
+      {% if parentDir %}
+      <span class="overline">{{ parentDir }}</span>
+      <h2>{{ name }}</h2>
+      {% else %}
+      <fog-canvas></fog-canvas>
+      {% endif %}
+      <section>
+        {{ content | safe }}
+      </section>
     </main>
   </body>
 </html>

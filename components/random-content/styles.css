@@ -1,0 +1,14 @@
+:host {
+  display: inline-block;
+}
+
+a {
+  color: var(--color-accent);
+  display: inline-flex;
+  font-size: 2em;
+}
+
+svg {
+  width: 1em;
+  height: 1em;
+}

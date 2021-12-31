@@ -1,3 +1,2 @@
-Helping find the correct incanations to summon accessibility for your experience
-
-<term-search></term-search>
+## HTML incantations for summoning accessibility
+<begin-browsing>Cast a spell</begin-browsing>

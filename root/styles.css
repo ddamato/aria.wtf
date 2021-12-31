@@ -1,0 +1,110 @@
+/* https://www.instagram.com/p/CU0anphAkhB/ */
+:root {
+  --color-accent: #702;
+}
+
+*,*:before,*:after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0 auto;
+  font-family: Lora, serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  line-height: 1.5;
+  max-width: 80ch;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Poppins, sans-serif;
+  line-height: 1.25;
+}
+
+.overline {
+  font-family: Poppins, sans-serif;
+  text-transform: uppercase;
+  background: var(--color-accent);
+  font-size: .8em;
+  font-weight: bolder;
+  padding: 0.25em 0.5em;
+  color: white;
+}
+
+a {
+  color: currentColor;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+header > * {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  text-decoration: none;
+}
+
+header * {
+  margin: 0;
+}
+
+header term-search {
+  margin-inline-start: auto;
+}
+
+main {
+  /* https://codepen.io/xubiod/pen/GQpGaK?editors=0010 */
+  flex: 1;
+  color: var(--color-accent);
+  border-radius: 1em;
+  position: relative;
+}
+
+fog-canvas {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: hard-light;
+}
+
+[data-page="index"] section {
+  position: relative;
+  filter: drop-shadow(0 .2em .1em rgba(0,17,0,.3));
+}
+
+#aria-wtf-logo {
+  width: 2em;
+  color: var(--color-accent);
+}
+
+[data-page="index"] main {
+  display: flex;
+  overflow: hidden;
+  background: var(--color-accent);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2em;
+  color: white;
+}
+
+[data-page="index"] p {
+  display: contents;
+}
+
+[data-page="index"] h2 {
+  text-align: center;
+  max-width: 40ch;
+  padding: 0 1em;
+  color: white;
+}

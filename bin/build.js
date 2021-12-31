@@ -49,10 +49,8 @@ async function compile(file) {
 async function lookup(metadata) {
   const reference = metadata.reduce((acc, { parentDir, name }) => {
     if (!parentDir) return acc;
-    if (!Array.isArray(acc[parentDir])) acc[parentDir] = [];
-    acc[parentDir].push(name);
-    return acc;
-  }, {});
+    return acc.concat({ term: name, group: parentDir, link: path.join(parentDir, name)});
+  }, []);
   return fs.writeFile(path.join(COMPILED_SITE_PATH, 'lookup.json'), JSON.stringify(reference), { encoding: 'utf8' });
 }
 
