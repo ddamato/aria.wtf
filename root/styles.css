@@ -13,6 +13,7 @@ html {
 
 body {
   margin: 0 auto;
+  color: black;
   font-family: Lora, serif;
   min-height: 100vh;
   display: flex;
@@ -25,6 +26,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: Poppins, sans-serif;
   line-height: 1.25;
+  color: var(--color-accent);
 }
 
 .overline {
@@ -65,7 +67,6 @@ header term-search {
 main {
   /* https://codepen.io/xubiod/pen/GQpGaK?editors=0010 */
   flex: 1;
-  color: var(--color-accent);
   border-radius: 1em;
   position: relative;
 }
