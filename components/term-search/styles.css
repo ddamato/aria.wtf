@@ -12,6 +12,8 @@
   padding: 0.25em .5em;
   box-sizing: border-box;
   filter: drop-shadow(0 .5em 1em rgb(17, 17, 17, .2));
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 #list:empty {

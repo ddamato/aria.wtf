@@ -2,7 +2,7 @@
 import html from './template.html';
 import css from './styles.css';
 
-const MAX_RESULTS = 10;
+const MAX_RESULTS = 6;
 
 function renderEntry({ display, link, text }) {
   const span = text ? `<span class="text">${text}</span>` : '';
