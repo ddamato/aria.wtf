@@ -26,6 +26,7 @@ input {
   background: transparent;
   font-size: .9em;
   flex: 1;
+  max-width: 230px;
 }
 
 input::placeholder {
