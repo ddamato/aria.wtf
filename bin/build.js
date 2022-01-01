@@ -40,6 +40,7 @@ async function compile(file) {
   const { attributes, body } = fm(markdown.toString());
   return { 
     attributes,
+    body,
     content: md.render(body),
     ...filedata,
     ...sitedata,
@@ -47,9 +48,14 @@ async function compile(file) {
 }
 
 async function lookup(metadata) {
-  const reference = metadata.reduce((acc, { parentDir, name }) => {
+  const reference = metadata.reduce((acc, { parentDir, name, body }) => {
     if (!parentDir) return acc;
-    return acc.concat({ term: name, group: parentDir, link: path.join(parentDir, name)});
+    return acc.concat({
+      text: body,
+      term: name, 
+      group: parentDir, 
+      link: path.join(parentDir, name)
+    });
   }, []);
   return fs.writeFile(path.join(COMPILED_SITE_PATH, 'lookup.json'), JSON.stringify(reference), { encoding: 'utf8' });
 }

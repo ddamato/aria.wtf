@@ -7,11 +7,11 @@
   background: white;
   border-radius: 1.5em;
   border: .125em solid var(--color-accent);
-  display: flex;
   padding: 0.25em .5em;
+  box-sizing: border-box;
+  display: flex;
   gap: .5em;
   flex: 1;
-  /* filter: drop-shadow(0 .5em 1em rgb(17, 17, 17, .2)); */
 }
 
 svg {
@@ -37,10 +37,65 @@ input:focus {
   outline: 0;
 }
 
-ul {
+#list {
   position: absolute;
+  z-index: 1;
+  margin-top: 0.25em;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  font-family: Poppins, sans-serif;
+  background: inherit;
+  border-radius: 1em;
+  border: inherit;
+  padding: inherit;
+  box-sizing: inherit;
+  filter: drop-shadow(0 .5em 1em rgb(17, 17, 17, .2));
 }
 
-ul:empty {
+#list:empty {
   display: none;
+}
+
+#list ul {
+  list-style-type: none;
+  margin: .5rem 0;
+  padding: 0;
+}
+
+#list a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#list ul[aria-label]:before {
+  content: attr(aria-label);
+  display: inline-block;
+  text-transform: uppercase;
+  background: var(--color-accent);
+  font-size: .6em;
+  font-weight: bolder;
+  padding: 0.25em 0.5em;
+  color: white;
+  box-sizing: border-box;
+  margin-bottom: .5rem;
+}
+
+#list li:not(:last-child) {
+  margin-bottom: .5rem;
+}
+
+#list .term {
+  display: block;
+  line-height: 1.25;
+  font-weight: bolder;
+}
+
+#list .text {
+  display: block;
+  opacity: .5;
+  font-size: .8em;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  overflow: hidden;
 }
