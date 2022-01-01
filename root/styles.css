@@ -150,7 +150,7 @@ fog-canvas {
   background: transparent;
   font-size: .9em;
   flex: 1;
-  /* max-width: 230px; */
+  max-width: 230px;
 }
 
 #search-input input:focus {
