@@ -65,10 +65,6 @@ header > div {
   flex: 1;
 }
 
-header term-search {
-  margin-inline-start: auto;
-}
-
 main {
   /* https://codepen.io/xubiod/pen/GQpGaK?editors=0010 */
   flex: 1;
