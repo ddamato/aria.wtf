@@ -35,10 +35,15 @@ export default class TermSearch extends HTMLElement {
     if (!eventInside) this.clear();
   }
 
+  _onEscape({ key }) {
+    if (key === 'Escape') this.clear();
+  }
+
   connectedCallback() {
     this._input = document.getElementById(this.getAttribute('input'));
     document.documentElement.addEventListener('focusin', (ev) => this._onLeave(ev));
     document.documentElement.addEventListener('click', (ev) => this._onLeave(ev));
+    document.documentElement.addEventListener('keydown', (ev) => this._onEscape(ev));
     this._input.addEventListener('keydown', (ev) => this._shiftTabIndex(ev));
     this._list.addEventListener('keydown', (ev) => this._shiftTabIndex(ev));
     this._input.addEventListener('focus', () => this._render());
