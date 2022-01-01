@@ -4,11 +4,11 @@ import css from './styles.css';
 
 const MAX_RESULTS = 10;
 
-function renderEntry({ term, link, text }) {
+function renderEntry({ term, link, text }, index) {
   const span = text ? `<span class="text">${text}</span>` : '';
   return `
     <li>
-      <a href="${link}">
+      <a href="${link}" tabIndex="-1">
       <span class="term">${term}</span>
       ${span}
       </a>
@@ -26,14 +26,39 @@ export default class TermSearch extends HTMLElement {
     this.attachShadow({ mode: 'open' }).innerHTML = `<style type="text/css">${css}</style>${html}`;
 
     window.fetch('./lookup.json').then((res) => res.json()).then((lookup) => this._lookup = lookup);
-    this._list = this.shadowRoot.querySelector('#list');    
+    this._list = this.shadowRoot.querySelector('#list');
+  }
+
+  _onLeave(ev) {
+    const targets = [this._input, this._list];
+    const eventInside = ev.composedPath().some((elem) => targets.includes(elem));
+    if (!eventInside) this.clear();
   }
 
   connectedCallback() {
     this._input = document.getElementById(this.getAttribute('input'));
-    console.log(this.getAttribute('input'), this._input);
+    document.documentElement.addEventListener('focusin', (ev) => this._onLeave(ev));
+    document.documentElement.addEventListener('click', (ev) => this._onLeave(ev));
+    this._input.addEventListener('keydown', (ev) => this._shiftTabIndex(ev));
+    this._list.addEventListener('keydown', (ev) => this._shiftTabIndex(ev));
     this._input.addEventListener('focus', () => this._render());
     this._input.addEventListener('input', () => this._render());
+  }
+
+  _shiftTabIndex({ key }) {
+    const keys = { ArrowDown: 1, ArrowUp: -1 };
+    if (!keys[key]) return this._input.focus();
+    const anchors = [...this._list.querySelectorAll('a')];
+    const currentFocus = anchors.reduce((index, { tabIndex }, i) => tabIndex === 0 ? i : index, null);
+    anchors.forEach((a) => a.tabIndex = -1);
+    const next = currentFocus === null ? 0 : (currentFocus + keys[key]) % anchors.length;
+    const target = anchors.at(next);
+    target.tabIndex = 0;
+    target.focus();
+  }
+
+  clear() {
+    this._list.innerHTML = '';
   }
 
   _search(input) {
@@ -60,7 +85,7 @@ export default class TermSearch extends HTMLElement {
   }
 
   _render() {
-    this._list.innerHTML = '';
+    this.clear();
     const results = this._search(this._input.value);
     for (let group in results) {
       const ul = document.createElement('ul');

@@ -143,6 +143,13 @@ fog-canvas {
   flex: 1;
 }
 
+#search-input label {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: text;
+}
+
 #search-input input {
   font: inherit;
   font-family: Poppins, sans-serif;
@@ -151,6 +158,7 @@ fog-canvas {
   font-size: .9em;
   flex: 1;
   max-width: 230px;
+  position: relative;
 }
 
 #search-input input:focus {
