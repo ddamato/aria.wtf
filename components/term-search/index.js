@@ -4,12 +4,12 @@ import css from './styles.css';
 
 const MAX_RESULTS = 10;
 
-function renderEntry({ term, link, text }, index) {
+function renderEntry({ display, link, text }) {
   const span = text ? `<span class="text">${text}</span>` : '';
   return `
     <li>
       <a href="${link}" tabIndex="-1">
-      <span class="term">${term}</span>
+      <span class="term">${display}</span>
       ${span}
       </a>
     </li>
@@ -52,6 +52,7 @@ export default class TermSearch extends HTMLElement {
 
   _shiftTabIndex({ key }) {
     const keys = { ArrowDown: 1, ArrowUp: -1 };
+    if (['Enter', 'Space'].includes(key)) return;
     if (!keys[key]) return this._input.focus();
     const anchors = [...this._list.querySelectorAll('a')];
     const currentFocus = anchors.reduce((index, { tabIndex }, i) => tabIndex === 0 ? i : index, null);
@@ -68,20 +69,20 @@ export default class TermSearch extends HTMLElement {
 
   _search(input) {
     return [].concat(this._lookup).filter(Boolean).reduce((results, entry) => {
-      const { term, group, text, link } = entry;
+      const { term, group, text, link, display } = entry;
       let index
 
       index = getResultIndex(input, term);
       if (~index) {
         results[group] = results[group] ?? [];
-        results[group].push({ term, link });
+        results[group].push({ display, link });
         return results;
       }
 
       index = getResultIndex(input, text);
       if (~index) {
         results[group] = results[group] ?? [];
-        results[group].push({ term, link, text: text.slice(index) });
+        results[group].push({ display, link, text: text.slice(index) });
         return results;
       }
 

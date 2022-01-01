@@ -26,8 +26,10 @@ function parse(file) {
   const { name } = path.parse(file);
   const dir = path.basename(path.dirname(file));
   const parentDir = dir !== 'content' ? dir : null;
+  const display = name.startsWith('role') ? name.split('-').join('=') : name;
   return {
     name,
+    display,
     filename: `${name}.html`,
     parentDir,
     filejoin: [COMPILED_SITE_PATH, parentDir].filter(Boolean)
@@ -48,11 +50,12 @@ async function compile(file) {
 }
 
 async function lookup(metadata) {
-  const reference = metadata.reduce((acc, { parentDir, name, body }) => {
+  const reference = metadata.reduce((acc, { parentDir, name, body, display }) => {
     if (!parentDir) return acc;
     return acc.concat({
       text: body,
-      term: name, 
+      term: name,
+      display,
       group: parentDir, 
       link: path.join(parentDir, name)
     });
