@@ -43,6 +43,19 @@ a {
   color: currentColor;
 }
 
+[href="#search"] {
+  font: inherit;
+  font-family: Poppins, sans-serif;
+  border: 0;
+  padding: .5em 1em;
+  background-color: var(--color-accent);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 1.5em;
+  text-decoration: none;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -63,6 +76,11 @@ header * {
 
 header > div {
   flex: 1;
+}
+
+header svg:not(#aria-wtf-logo) {
+  height: 1em;
+  width: 1em;
 }
 
 main {
@@ -110,4 +128,35 @@ fog-canvas {
   padding: 0 1em;
   color: white;
   font-size: min(7vw, 1em);
+}
+
+#search-input {
+  position: relative;
+  background: white;
+  border-radius: 1.5em;
+  border: .125em solid var(--color-accent);
+  padding: 0.25em .5em;
+  display: flex;
+  align-items: center;
+  color: var(--color-accent);
+  gap: .5em;
+  flex: 1;
+}
+
+#search-input input {
+  font: inherit;
+  font-family: Poppins, sans-serif;
+  border: 0;
+  background: transparent;
+  font-size: .9em;
+  flex: 1;
+  /* max-width: 230px; */
+}
+
+#search-input input:focus {
+  outline: 0;
+}
+
+#search-input input::placeholder {
+  color: var(--color-accent);
 }

@@ -26,8 +26,12 @@ export default class TermSearch extends HTMLElement {
     this.attachShadow({ mode: 'open' }).innerHTML = `<style type="text/css">${css}</style>${html}`;
 
     window.fetch('./lookup.json').then((res) => res.json()).then((lookup) => this._lookup = lookup);
-    this._list = this.shadowRoot.querySelector('#list');
-    this._input = this.shadowRoot.querySelector('input');
+    this._list = this.shadowRoot.querySelector('#list');    
+  }
+
+  connectedCallback() {
+    this._input = document.getElementById(this.getAttribute('input'));
+    console.log(this.getAttribute('input'), this._input);
     this._input.addEventListener('focus', () => this._render());
     this._input.addEventListener('input', () => this._render());
   }
@@ -64,9 +68,5 @@ export default class TermSearch extends HTMLElement {
       ul.setAttribute('aria-label', group);
       ul.innerHTML = results[group].map(renderEntry).slice(0, MAX_RESULTS).join('');
     }
-  }
-
-  focus() {
-    this._input.focus();
   }
 }

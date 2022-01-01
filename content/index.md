@@ -1,2 +1,2 @@
 ## HTML incantations for summoning accessibility
-<begin-browsing>Cast a spell</begin-browsing>
+<a href="#search">Cast a spell</a>

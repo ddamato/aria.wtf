@@ -10,8 +10,14 @@
         <h1>aria.wtf</h1>
       </a>
       <div>
-        <term-search></term-search>
-        <random-content></random-content>
+        <div id="search-input">
+          {% include "search.svg" %}
+          <input id="search" type="text" placeholder="Search for a term or component" autocomplete="off"/>
+          <term-search input="search"></term-search>
+        </div>
+        <random-content>
+          {% include "random.svg" %}
+        </random-content>
       </div>
     </header>
     <main>
