@@ -45,6 +45,7 @@ class Particle {
   }
 
   draw() {
+    if (!this.image.naturalWidth) return;
     const offsetX = this.x - this.image.naturalWidth / 2;
     const offsetY = this.y - this.image.naturalHeight / 2;
     this.context.drawImage(this.image, offsetX, offsetY);
