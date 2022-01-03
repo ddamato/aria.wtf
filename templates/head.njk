@@ -24,7 +24,10 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="alternate" href="{{ baseurl }}" hreflang="en-us" />
 
-<link href="{{ fontPreload }}" rel="stylesheet" media="all">
+<link rel="stylesheet" href="{{ fontPreload }}" media="print" onload="this.media='all'"/>
+<noscript>
+    <link href="{{ fontPreload }}" rel="stylesheet" type="text/css"/>
+</noscript>
 <link href="styles.css" rel="stylesheet" media="all">
 
 <script src="components.iife.js"></script>
